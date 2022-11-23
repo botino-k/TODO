@@ -1,8 +1,13 @@
 import React from 'react';
-import './App.css';
+import stl from './App.module.less';
+import TasksContainer from './components/TasksContainer';
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className={stl.wrapper}>
+      <TasksContainer />
+    </div>
+  );
 }
 
 export default App;
