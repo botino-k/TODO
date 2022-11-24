@@ -1,0 +1,82 @@
+.wrapper {
+  background-color: #d6d4d4;
+  border-radius: 10px;
+}
+
+.form {
+  padding: 15px;
+}
+
+.formLabel {
+  font-size: 16px;
+}
+
+.formLabelFix {
+  margin-top: 3px;
+  flex: 1 0 50px;
+}
+
+.formItem {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.formItemFix {
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.taskInputBlock {
+  width: 100%;
+
+  input {
+    margin-bottom: 15px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.dateInputBlock {
+  display: flex;
+  width: max(200px, 30%);
+}
+
+.formInput {
+  min-height: 30px;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.btnInput {
+  display: inline-block;
+  background-color: #e3e3e3;
+  border: 1px solid #696868;
+  border-radius: 5px;
+  padding: 0 5px 4px 5px;
+  transition: background-color ease-in 0.2s;
+
+  &:active {
+    box-shadow: 0px -1px 0px 1px #d7d7d7;
+    background-color: #cecece;
+    scale: 0.98;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.fileItemContainer {
+  position: relative;
+}
+
+.fileInputItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0;
+  opacity: 0;
+}
