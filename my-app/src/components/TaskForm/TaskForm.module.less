@@ -5,10 +5,16 @@
 
 .form {
   padding: 15px;
+  margin-bottom: 15px;
 }
 
 .formLabel {
   font-size: 16px;
+}
+
+.fileBlock{
+  display:flex;
+  flex-wrap: wrap;
 }
 
 .formLabelFix {
@@ -71,6 +77,7 @@
 
 .fileItemContainer {
   position: relative;
+  margin-right: 20px;
 }
 
 .fileInputItem {
@@ -79,4 +86,25 @@
   left: 0;
   font-size: 0;
   opacity: 0;
+}
+
+.fileName{
+display: block;
+}
+
+.btnAdd {
+  padding: 7px;
+  border: 1px solid rgb(105, 104, 104);
+  background-color: rgb(227, 227, 227);
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+
+  &:hover {}
+
+  &:active {
+    box-shadow: 0px -1px 0px 1px #d7d7d7;
+    background-color: rgb(206, 206, 206);
+    scale: 0.98;
+  }
 }
