@@ -24,7 +24,7 @@ function Task({ dataToDo, toggleTODO, deleteTODO }: Props) {
       const dif = new Date(`${date}`).getTime() - Date.now();
       dif < 0 ? setDeadlineOVER(true) : setDeadlineOVER(false);
     }
-    if (time) {
+    if (time && !date) {
       const today = new Date();
       const dif = time < today.toLocaleTimeString();
       dif ? setDeadlineOVER(true) : setDeadlineOVER(false);
