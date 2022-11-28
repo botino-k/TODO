@@ -11,6 +11,34 @@ interface Props {
 }
 
 function Task({ dataToDo, toggleTODO, deleteTODO }: Props) {
+  // const [deadLineDateToDo, setDeadLineDateToDo] = React.useState();
+  // const [deadLineTimeToDo, setDeadLineTimeToDo] = React.useState();
+  const [deadlineOVER, setDeadlineOVER] = React.useState(false);
+
+  const getTime = (date: string, time: string) => {
+    if (date && time) {
+      const dif = new Date(`${date}T${time}`).getTime() - Date.now();
+      dif < 0 ? setDeadlineOVER(true) : setDeadlineOVER(false);
+    }
+    if (date) {
+      const dif = new Date(`${date}`).getTime() - Date.now();
+      dif < 0 ? setDeadlineOVER(true) : setDeadlineOVER(false);
+    }
+    if (time) {
+      const today = new Date();
+      const dif = time < today.toLocaleTimeString();
+      dif ? setDeadlineOVER(true) : setDeadlineOVER(false);
+    }
+  };
+
+  React.useEffect(() => {
+    const interval = setInterval(
+      () => getTime(dataToDo.deadline.date, dataToDo.deadline.time),
+      1000
+    );
+    return () => clearInterval(interval);
+  }, []);
+
   const getLinksRefArr = () => {
     const arr = [];
     for (const i in dataToDo) {
@@ -40,8 +68,9 @@ function Task({ dataToDo, toggleTODO, deleteTODO }: Props) {
         <div className={stl.taskBoxMain}>
           <h1>{dataToDo.title}</h1>
           <p>{dataToDo.description}</p>
-          <p className={stl.taskDeadline}>
-            <span>Deadline:</span> {dataToDo.deadline?.toString()}
+          <p className={deadlineOVER ? stl.taskDeadline : ''}>
+            <span>Deadline:</span> <span>{dataToDo.deadline.date}</span>{' '}
+            <span>{dataToDo.deadline.time}</span>
           </p>
           <div>{todoFiles}</div>
         </div>

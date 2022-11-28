@@ -15,6 +15,7 @@ import {
 } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ref, getDownloadURL, uploadBytesResumable, deleteObject } from 'firebase/storage';
+import dayjs from 'dayjs';
 
 function TasksContainer() {
   const [todoData, setTodoData] = React.useState([]);
@@ -66,16 +67,23 @@ function TasksContainer() {
   const createTODO = async (event: any) => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.target));
+    console.log(dayjs());
+    console.log(formData);
 
     const docRef = await addDoc(collection(db, 'todo'), {
       title: formData.title,
       description: formData.description,
       complited: false,
-      deadline: `${formData.deadlineDate} ${formData.deadlineTime}`,
+      deadline: {
+        date: `${formData.deadlineDate}`,
+        time: `${formData.deadlineTime}`,
+      },
+      //  `${formData.deadlineDate} ${formData.deadlineTime}`,
     });
     if (uploadFiles) {
       await uploadFilesTODO(uploadFiles, docRef.id);
     }
+    event.target.reset();
   };
 
   //read todo tasks
