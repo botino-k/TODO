@@ -5,22 +5,24 @@ import plus from '../../assets/plus-svgrepo-com.svg';
 
 interface Props {
   createTODO: (event: any) => void;
+  setFormFilesData: (prop: FileList) => void;
 }
 
-function TaskForm({ createTODO }: Props) {
+function TaskForm({ createTODO, setFormFilesData }: Props) {
   const [nameFiles, setNameFiles] = React.useState<string[]>([]);
 
-  const getFilesData = (event: React.FormEvent<HTMLInputElement>) => {
+  const getFilesData = async (event: React.FormEvent<HTMLInputElement>) => {
     const fls = (event.target as HTMLInputElement).files;
     const fileNameArr: string[] = [];
-
     if (fls) {
+      setFormFilesData(fls);
       for (let i = 0; i < fls.length; i++) {
         fileNameArr.push(fls[i].name);
       }
     }
     setNameFiles(fileNameArr);
   };
+
   const fileCollectionBlock = nameFiles.map((el, index) => (
     <span className={stl.fileName} key={index}>{`${index + 1})  ${el}`}</span>
   ));

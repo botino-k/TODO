@@ -5,12 +5,26 @@ import { todoTask } from '../../types';
 import remove from '../../assets/big-trash-can-svgrepo-com.svg';
 
 interface Props {
-  dataToDo: todoTask;
+  dataToDo: todoTask | any;
   toggleTODO: (dataToDo: todoTask) => void;
   deleteTODO: (dataToDo: todoTask) => void;
 }
 
 function Task({ dataToDo, toggleTODO, deleteTODO }: Props) {
+  const getLinksRefArr = () => {
+    const arr = [];
+    for (const i in dataToDo) {
+      i.includes('file') ? arr.push(dataToDo[i]) : null;
+    }
+    return arr;
+  };
+
+  const todoFiles = getLinksRefArr().map((elem: any, index: number) => (
+    <div key={index} className={stl.link}>
+      <a href={elem[1]}> {elem[0]}</a>
+    </div>
+  ));
+
   return (
     <article className={stl.wrapper}>
       <div className={dataToDo.complited ? `${stl.taskBox} ${stl.complited}` : stl.taskBox}>
@@ -29,7 +43,7 @@ function Task({ dataToDo, toggleTODO, deleteTODO }: Props) {
           <p className={stl.taskDeadline}>
             <span>Deadline:</span> {dataToDo.deadline?.toString()}
           </p>
-          <a href={dataToDo.file}>...</a>
+          <div>{todoFiles}</div>
         </div>
         <div className={stl.taskBoxRemove}>
           <button onClick={() => deleteTODO(dataToDo)} className={stl.taskBoxRemoveBtn}>
